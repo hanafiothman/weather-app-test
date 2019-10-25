@@ -22,7 +22,7 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  //text-align: center;
   color: #2c3e50;
   background-color: #E9E9ED;
   margin: 0;
@@ -49,56 +49,83 @@ body {
 }
 
 #home {
-  //background-color: red;
-  //border: 1px solid red;
-  height: 100vh;
+	background: url(../assets/cloud.jpg) no-repeat center center fixed;
+	background-size: cover;
 
+	height: 100vh;
   #upper-panel {
-    height: 40%;
+    height: 80%;
     width: 100%;
-    border-bottom: 0.3vh solid green;
     position: relative;
-    background: url(../assets/cloud.jpg) no-repeat center center fixed;
-    background-size: cover;
+		-webkit-transition: all 0.4s ease-in-out;
+		transition: all 0.4s ease-in-out;
   }
+	#left-upper-panel {
+		-webkit-transition: width 0.4s ease-in-out;
+		transition: width 0.4s ease-in-out;
+		width: 100%;
+		position: relative;
+		//border: 1px solid green;
+		height: 100%;
+		float: left;
+		text-align: center;
+	}
+	#right-upper-panel {
+		/*-webkit-transition: width 0.4s ease-in-out;
+		transition: width 0.4s ease-in-out;*/
+		width: 50%;
+		position: relative;
+		//border: 1px solid green;
+		height: 100%;
+		float: right;
+	}
   #lower-panel {
     height: 50%;
     width: 100%;
     position: relative;
+
+		.fade-enter-active {
+			transition: opacity 0.5s ease-in-out;
+		}
+
+		.fade-enter,
+		.fade-leave-to {
+			opacity: 0
+		}
   }
 }
 
 #search-panel {
+	//border: 1px solid red;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -35%;
-  width: 70%;
+  top: 30%;
+  //width: 40%;
+	width: 100%;
+
   .search-input {
-    width: 50%;
-    border: 0.15vw solid #CCC;
+    width: 80%;
+    border: 0.15vw solid grey;
+		border-style: inset;
     border-radius: 0.3vw;
     font-size: 1.8vh;
-    padding: 1.4vh 0 1.4vh 5vh;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+    padding: 1.5vh 0 1.5vh 5vh;
     background-color: white;
     background-image: url('../assets/search-icon.png');
     background-size: 3vh 60%;
     background-position: 0.7vw 1vh;
     background-repeat: no-repeat;
-    &:focus {
-      width: 100%;
-    }
   }
 
   .list-search-result {
+		position: absolute;
+		left: 10%;
     z-index: 999;
-    width: 100%;
+    width: 80%;
     padding: 0;
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color: #1C1C1D;
+		color: white;
 
     .element-list {
       padding: 1vh 2vw;
@@ -106,6 +133,7 @@ body {
       cursor: pointer;
       &:hover {
         background-color: lightgray;
+				color: black;
       }
       //width: 100%;
 
@@ -113,13 +141,104 @@ body {
   }
 }
 
-#weather-display-panel {
-  border: 2px solid green;
+#recent-location-panel {
+	//border: 2px solid black;
+	//background-color: #1C1C1D;
+	height: 80%;
   position: absolute;
-  top: -2.5%;
-  width: 60%;
-  height: 100%;
-  margin-top: 2.5%;
-  left: 2%;
-  background-color: white;
+  top: 10%;
+  right: 5%;
+  //margin-left: -90%;
+  width: 80%;
+	border-collapse: collapse;
+	padding: 0.25rem;
+	border-style: hidden;
+	//overflow: hidden;
+
+	#list-location {
+		border: 2px solid gray;
+		border-style: groove;
+		overflow: scroll;
+		height: 90%;
+	}
+
+	h3 {
+		color: black;
+		margin: 1vh auto;
+		font-size: 2.5vh;
+	}
+
+	.element-location {
+		background-color: black;
+		opacity: 0.8;
+		margin: 1vh;
+		padding: 1.5vh 1vw;
+		color: white;
+		font-size: 100%;
+		&:hover {
+			cursor: pointer;
+		}
+		//position: relative;
+
+		.fa {
+			//margin-top: 0.5vh;
+			&:hover {
+				//cursor: pointer;
+				color: red;
+			}
+		}
+	}
+
+	.ghost {
+	  opacity: 0.4;
+	  background: black;
+	}
+}
+
+#weather-display-panel {
+  position: absolute;
+  width: 95%;
+  height: 90%;
+	top: 5%;
+	left: 2.5%;
+	//background-color: #1C1C1D;
+	border-style: hidden;
+
+	.table {
+		display: table;
+		width: 100%;
+		border-collapse: collapse;
+		//margin-top: 1.5vh;
+	}
+	.columns {
+		display: table-row;
+		border-style: groove;
+		opacity: 0.9;
+	}
+
+	#forecast-element {
+		display: table-cell;
+		border: 1px solid white;
+		background-color: #141415;
+		color: white;
+		//float: left;
+		text-align: center;
+		padding: 0.5vh 1vw;
+		p {
+			font-size: 1.8vh;
+		}
+		h4, h5 {
+			margin: 1vh;
+		}
+	}
+}
+
+legend {
+	font-weight: bold;
+	//text-align: center;
+	color: white;
+	background-color: #1C1C1D;
+	border: 2px solid grey;
+	border-style: groove;
+	padding: 0 1vw;
 }

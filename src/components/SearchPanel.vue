@@ -27,7 +27,7 @@ export default {
     getLocationSearchResult(locationInput) {
       console.log(locationInput);
       if(locationInput.length > 1) {
-        this.$http.get('https://www.metaweather.com/api/location/search/?query='+locationInput)
+        this.$http.get('https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query='+locationInput)
         .then(res => {
           res.data.sort(function(a, b) {
             return a.title.length - b.title.length;
@@ -51,10 +51,18 @@ export default {
       this.emptyInput();
       this.$store.commit('setSelectedLocation', location);
 
-      this.$http.get('https://www.metaweather.com/api/location/'+this.$store.getters.getSelectedLocation.woeid)
+      this.$http.get('https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/'+this.$store.getters.getSelectedLocation.woeid)
       .then(res => {
         console.log(res.data);
         this.$store.commit('setSelectedLocationInfo', res.data);
+        if(!this.$store.getters.getRecentLocations.some(locationObj => locationObj.woeid === res.data.woeid)) {
+          this.$store.commit('addLocationRecentLocations', { fullTitle: res.data.title+', '+res.data.parent.title, woeid: res.data.woeid });
+        }
+        else {
+          this.$store.commit('removeLocationRecentLocations', this.$store.getters.getRecentLocations.find(locationObj => locationObj.woeid === res.data.woeid));
+          this.$store.commit('addLocationRecentLocations', { fullTitle: res.data.title+', '+res.data.parent.title, woeid: res.data.woeid });
+        }
+        localStorage.setItem('recentLocations', JSON.stringify(this.$store.getters.getRecentLocations));
       });
     }
   },

@@ -7,7 +7,8 @@ const store = new Vuex.Store({
 
   state: {
     selectedLocation: [],
-    selectedLocationInfo: []
+    selectedLocationInfo: [],
+    recentLocations: []
   },
 
   getters: {
@@ -16,6 +17,9 @@ const store = new Vuex.Store({
     },
     getSelectedLocationInfo() {
       return store.state.selectedLocationInfo;
+    },
+    getRecentLocations() {
+      return store.state.recentLocations;
     }
   },
 
@@ -25,6 +29,15 @@ const store = new Vuex.Store({
     },
     setSelectedLocationInfo(state, locationInfo) {
       state.selectedLocationInfo = locationInfo;
+    },
+    setRecentLocations(state, locations) {
+      state.recentLocations = locations;
+    },
+    addLocationRecentLocations(state, location) {
+      state.recentLocations.unshift(location);
+    },
+    removeLocationRecentLocations(state, location) {
+      state.recentLocations.splice(state.recentLocations.indexOf(location), 1);
     }
   }
 
