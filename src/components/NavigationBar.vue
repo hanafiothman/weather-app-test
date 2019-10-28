@@ -1,6 +1,5 @@
 <template>
   <div id="navigation-bar">
-    <!--<img src="../assets/logo.png">-->
     <nav>
       <router-link v-for="routes in links"
         class="routerlink"
@@ -21,11 +20,6 @@ export default {
           id: 0,
           title: 'Home',
           page:'/home'
-        },
-        {
-          id: 1,
-          title: 'Map',
-          page:'/map'
         }
       ]
     }
